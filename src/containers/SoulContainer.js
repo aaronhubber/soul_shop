@@ -1,10 +1,15 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import SoulList from "../components/SoulList";
 import SoulBasket from "../components/SoulBasket";
 
 
 const SoulContainer =() =>{
     const [selectedSoul, setSelectedSoul]=useState([])
+    const [total,setTotal] = useState(0)
+    // useEffect (()=>{
+    //     setTotal(10)
+    //     console.log("banana",total)
+    // },[total])
     const [souls, setSouls] = useState (
 
         [
@@ -42,8 +47,9 @@ const SoulContainer =() =>{
         ]
     )
     const onAddClick = (addedSoul) => {
-
-        const copyList = [... selectedSoul]
+        const tempTotal = total + addedSoul.price
+        setTotal(tempTotal)
+        const copyList = [... selectedSoul] 
 
         const isOnList = copyList.some((soul) => {
             return soul.id === addedSoul.id
@@ -51,20 +57,57 @@ const SoulContainer =() =>{
 
         if (!isOnList) {
             copyList.push(addedSoul)
+
+        }
+        console.log("Total",total)
+        setSelectedSoul(copyList)
+    }
+
+    const onRemoveClick = (removedSoul) => {
+        const tempTotal = total - removedSoul.price
+        setTotal(tempTotal)
+        const copybasket = [... selectedSoul]
+
+        const isInBasket = copybasket.some((soul) => {
+            return soul.id === removedSoul.id
+        })
+
+        if (isInBasket) {
+            copybasket.shift(removedSoul)
         }
 
-        setSelectedSoul(copyList)
+        setSelectedSoul(copybasket)
+    }
 
-     }
+    // const totalCost = (()=>{
+        
+    // })
+    // total = 0
+    // for (soul in selectedSoul)
+    // total += soul
+    // return total
+
+    // const totalCost = ((Sou)=>{
+    //     let total = 0
+    //     for (s in souls)
+    //     total += soul.price
+    //     return total
+    // })
+
 
         
 
 
         return(
             <>
+            <body>
             <h1>Souls for Sale</h1>
-            <SoulList souls={souls} onAddClick={onAddClick}/>
-            <SoulBasket selectedSoul={selectedSoul}>Basket</SoulBasket>
+            <div className="container">
+            <SoulList souls={souls} onAddClick={onAddClick} />
+            <SoulBasket className="basket" selectedSoul={selectedSoul} onRemoveClick={onRemoveClick} total={total}>Basket</SoulBasket>
+            </div>
+            </body>
+
             </>
         )
 

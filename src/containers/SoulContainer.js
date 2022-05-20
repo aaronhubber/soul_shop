@@ -1,15 +1,10 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import SoulList from "../components/SoulList";
 import SoulBasket from "../components/SoulBasket";
-
 
 const SoulContainer =() =>{
     const [selectedSoul, setSelectedSoul]=useState([])
     const [total,setTotal] = useState(0)
-    // useEffect (()=>{
-    //     setTotal(10)
-    //     console.log("banana",total)
-    // },[total])
     const [souls, setSouls] = useState (
 
         [
@@ -78,25 +73,6 @@ const SoulContainer =() =>{
 
         setSelectedSoul(copybasket)
     }
-
-    // const totalCost = (()=>{
-        
-    // })
-    // total = 0
-    // for (soul in selectedSoul)
-    // total += soul
-    // return total
-
-    // const totalCost = ((Sou)=>{
-    //     let total = 0
-    //     for (s in souls)
-    //     total += soul.price
-    //     return total
-    // })
-
-
-        
-
 
         return(
             <>

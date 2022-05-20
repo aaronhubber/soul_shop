@@ -7,7 +7,7 @@ const SoulList = ({souls, onAddClick}) =>{
         return (
             <Soul soul={soul} onAddClick={onAddClick} ></Soul>
         )
-    }) 
+    })
     
 
     return(
